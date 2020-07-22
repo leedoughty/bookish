@@ -1,31 +1,11 @@
 const express = require("express");
-const db = require("./databaseConnection");
-const { Book } = require("./book");
+const router = require("./router");
 
 const app = express();
+app.use("/books", router);
 
 app.get("/", (request, response) => {
-  response.send("Hello World");
-});
-
-app.get("/books", (request, response) => {
-  db.any("SELECT * FROM books")
-    .then((data) => {
-      const listBooks = data.map((book) => {
-        return new Book(
-          book.id,
-          book.title,
-          book.author,
-          book.isbn,
-          book.barcode
-        );
-      });
-      console.log(listBooks);
-      response.send(listBooks);
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+  response.send("welcome to bookish!");
 });
 
 app.listen(3000, () => console.log("Listening on port 3000"));
