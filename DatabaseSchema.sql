@@ -1,0 +1,22 @@
+CREATE TABLE books (
+id SERIAL PRIMARY KEY,
+title VARCHAR(255) NOT NULL,
+author VARCHAR(255),
+isbn VARCHAR(255),
+barcode VARCHAR(255)
+);
+
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+firstName VARCHAR(255) NOT NULL,
+surname VARCHAR(255),
+username VARCHAR(255),
+password VARCHAR(255)
+);
+
+CREATE TABLE copiesOfBooks (
+copyId SERIAL PRIMARY KEY,
+bookId INT REFERENCES books(id),
+userId INT REFERENCES users(id),
+dateOfReturn VARCHAR(255)
+);
