@@ -1,9 +1,12 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const books = require("./routers/books");
 const user = require("./routers/user");
 const session = require("./routers/session");
 
 const app = express();
+app.use(bodyParser.json());
 
 app.use("/", session);
 app.use("/books", books);

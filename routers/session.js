@@ -1,4 +1,6 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+const credentials = require("../credentials");
 
 const session = express.Router();
 
@@ -11,7 +13,9 @@ session.get("/login", (request, response) => {
 });
 
 session.post("/login", (request, response) => {
-  response.send("you are logging in");
+  const token = jwt.sign(request.body, credentials.PRIVATE_KEY);
+  response.cookie("ckns_jwt", token);
+  response.send(token);
 });
 
 module.exports = session;
