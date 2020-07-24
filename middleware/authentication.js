@@ -13,7 +13,7 @@ const configurePassport = () => {
     new JwtStrategy(jwtOptions, (jwt_payload, done) => {
       console.log({ jwt_payload });
       db.any(
-        `SELECT EXISTS(select id from users where username = '${username}' and password = '${password}')`
+        `SELECT EXISTS(select id from users where username = '${jwt_payload}')`
       ).then((data) => {
         console.log(data[0].exists);
         if (data) {

@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+const jwtDecode = require("jwt-decode");
 const user = express.Router();
 
 user.get("/", (request, response) => {
@@ -10,7 +11,8 @@ user.get(
   "/books",
   passport.authenticate("jwt", { session: false }),
   (request, response) => {
-    response.send("here are your loaned books");
+    // const { username } = jwtDecode(request.headers.authorization);
+    response.send(`here are your loaned books`);
   }
 );
 
